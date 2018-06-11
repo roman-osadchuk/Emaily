@@ -43,9 +43,9 @@ class Header extends Component {
       case null:
         return '';
       case false:
-        return <a href="/auth/google"> Login with Google </a>;
+        return  <Button variant="raised" href="/auth/google"> Login with Google </Button>  
       default: 
-        return <a href="/api/logout"> Logout </a>;
+        return <Button variant="raised" href="/api/logout"> Logout </Button>  
     }
   }
   
@@ -58,15 +58,11 @@ class Header extends Component {
     return (
       <div className={classes.root}>
         <AppBar position="static" className={classes.appBarColor}>
-          <Toolbar>
-            {/* <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-              <MenuIcon />
-            </IconButton> */}
-            <Typography variant="title" color="inherit" className={classes.flex}>
-              Emaily
-            </Typography>
+          <Toolbar style={{display: 'flex', justifyContent: 'space-between'}} >
+              <Link to={this.props.auth ? '/surveys' : '/'} style={{fontSize: '36px', color: '#fff', textDecoration: 'none'}} >
+                Emaily
+              </Link>
             {this.renderContent()}
-            {/* <Button color="inherit">Login with Google</Button> */}
           </Toolbar>
         </AppBar>
       </div>
@@ -83,23 +79,3 @@ function mapStateToProps(state) {
 }
 
 export default withStyles(styles)(connect(mapStateToProps, null)(Header));
-
-
-
-
-// import Button from '@material-ui/core/Button';
-// 
-// class Header extends Component {
-//   render() {
-//     return (
-//       <div>
-//         Header
-//         <Button variant="raised" color="primary">
-//           Hello World
-//         </Button>
-//       </div>
-//     )
-//   }
-// }
-// 
-// export default Header;
