@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
+const bodyParser = require('body-parser');
 const passport = require('passport');
 const keys = require('./config/keys');
 require('./models/User');
@@ -10,6 +11,8 @@ require('./services/passport');
 mongoose.connect(keys.mongoURI);
 
 const app = express();
+
+app.use(bodyParser.json());
 
 app.use(
   cookieSession({
@@ -25,6 +28,7 @@ app.use(passport.session());
 // authRoutes(app);
 // ===
 require('./routes/authRoutes')(app);
+require('./routes/billingRoutes')(app);
 
 
 // localhost:5000/auth/google

@@ -10,6 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Payments from './Payments';
+
 
 
 
@@ -45,7 +47,11 @@ class Header extends Component {
       case false:
         return  <Button variant="raised" href="/auth/google"> Login with Google </Button>  
       default: 
-        return <Button variant="raised" href="/api/logout"> Logout </Button>  
+        return <div className="header_toolbar">
+          <Payments />
+          <div className="header_credits">Credits: {this.props.auth.credits}</div>
+          <Button variant="raised" href="/api/logout"> Logout </Button>
+        </div>  
     }
   }
   

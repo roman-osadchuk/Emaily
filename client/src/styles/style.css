@@ -1,0 +1,32 @@
+/********** HEADER ***********/
+
+.header_toolbar {
+  display: flex;
+  align-items: center;
+}
+
+.header_toolbar > div:nth-child(1) {
+  /* margin-right: 20px; */
+}
+
+.header_toolbar > div:nth-child(1) > button > span {
+  background-image: none !important;
+  height: 36px !important;
+  line-height: 36px !important;
+}
+
+.header_credits {
+  margin: 0px 25px;
+  font-size: 24px;
+}
+
+
+
+
+
+
+
+
+/********** HEADER ***********/
+
+
