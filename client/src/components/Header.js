@@ -36,31 +36,29 @@ const styles = {
 class Header extends Component {
   constructor(props) {
     super(props);
-    
-    
+
+
   }
-  
+
   renderContent() {
     switch (this.props.auth) {
       case null:
         return '';
       case false:
-        return  <Button variant="raised" href="/auth/google"> Login with Google </Button>  
-      default: 
+        return  <Button variant="raised" href="/auth/google"> Login with Google </Button>
+      default:
         return <div className="header_toolbar">
           <Payments />
           <div className="header_credits">Credits: {this.props.auth.credits}</div>
           <Button variant="raised" href="/api/logout"> Logout </Button>
-        </div>  
+        </div>
     }
   }
-  
-  
+
+
   render() {
     const { classes } = this.props;
-    console.log('this.props');
-    console.log(this.props);
-    
+
     return (
       <div className={classes.root}>
         <AppBar position="static" className={classes.appBarColor}>
