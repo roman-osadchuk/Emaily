@@ -6,18 +6,19 @@ import * as actions from '../actions'
 
 import Header from './Header';
 import Landing from './Landing';
-const Dashboard = () => <h2>Dashboard</h2>;
-const ServeyNew = () => <h2>ServeyNew</h2>;
+import { Thanks } from './Thanks';
+import { Dashboard } from './Dashboard';
+import SurveyNew from './surveys/SurveyNew';
 
 
 class App extends Component {
-  
-  
+
+
   componentDidMount() {
     this.props.fetchUser();
   }
-  
-  
+
+
   render() {
     return (
       <div>
@@ -26,7 +27,8 @@ class App extends Component {
             <Header />
             <Route exact path="/" component={Landing} />
             <Route exact path="/surveys" component={Dashboard} />
-            <Route path="/surveys/new" component={ServeyNew} />
+            <Route exact path="/api/surveys/thank" component={Thanks} />
+            <Route path="/surveys/new" component={SurveyNew} />
           </div>
         </BrowserRouter>
       </div>
