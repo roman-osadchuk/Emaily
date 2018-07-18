@@ -17,9 +17,27 @@
     display: flex;
     justify-content: space-between;
     width: 400px;
-    margin: 0 auto;
+    margin: 15px auto;
 
     > a {
         text-decoration: none;
+    }
+}
+
+
+.survey_form_review_container {
+    width: 400px;
+    margin: 0 auto;
+
+    .survey_form_review_field {
+        width: 100%;
+        margin: 15px 0;
+
+        > div {
+
+            > input {
+                color: #000;
+            }
+        }
     }
 }

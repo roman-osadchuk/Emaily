@@ -3,14 +3,11 @@ import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 import SurveyField from './SurveyField';
 import Button from '@material-ui/core/Button';
+import validateEmails from '../../utils/validateEmails';
+import { FIELDS } from './formFields';
 
 
-const FIELDS = [
-    { label: 'Survey Title', name: 'title' },
-    { label: 'Subject Line', name: 'subject' },
-    { label: 'Email Body', name: 'body' },
-    { label: 'Recipient List', name: 'emails' }
-];
+
 
 class SurveyForm extends Component {
 
@@ -21,9 +18,11 @@ class SurveyForm extends Component {
     }
 
   render() {
+      const { onSurveySubmit } = this.props;
     return (
       <div>
-          <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
+          <h1 style={{ textAlign: 'center', fontFamily: 'Arial, sans-serif' }}>Create new survey</h1>
+          <form onSubmit={this.props.handleSubmit(onSurveySubmit)}>
               {this.renderFields()}
               <div className="survey_cancel_submit_button_container">
                   <Link to="/surveys">
@@ -38,7 +37,36 @@ class SurveyForm extends Component {
   }
 };
 
+
+function validate(values) {
+    const errors = {};
+
+    errors.emails = validateEmails(values.emails || '');
+
+    if (!values.title) {
+        errors.title = 'You must provide a title';
+    }
+
+    if (!values.subject) {
+        errors.subject = 'You must provide a subject';
+    }
+
+    if (!values.body) {
+        errors.body = 'You must provide a body';
+    }
+
+    if (!values.emails) {
+        errors.emails = 'You must provide recipients';
+    }
+
+
+
+    return errors;
+}
+
+
 export default reduxForm({
     validate: validate,
+    destroyOnUnmount: false,
     form: 'surveyForm'
 })(SurveyForm);
