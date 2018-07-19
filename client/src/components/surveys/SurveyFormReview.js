@@ -3,12 +3,13 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { FIELDS } from './formFields';
 
 
-const SurveyFormReview = ({ onCancel, formValues, submitSurvey }) => {
+const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
 
     const reviewFields = FIELDS.map(({ name, label }) => {
         return (
@@ -26,7 +27,7 @@ const SurveyFormReview = ({ onCancel, formValues, submitSurvey }) => {
             <div className="survey_cancel_submit_button_container">
                 <Button variant="contained" color="secondary" type="button" onClick={onCancel}>Back</Button>
 
-                <Button variant="contained" color="primary" type="submit" onClick={() => submitSurvey(formValues)}>Send Survey</Button>
+                <Button variant="contained" color="primary" type="submit" onClick={() => submitSurvey(formValues, history)}>Send Survey</Button>
             </div>
         </div>
     )
@@ -38,4 +39,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, actions)(SurveyFormReview);
+export default connect(mapStateToProps, actions)(withRouter(SurveyFormReview));

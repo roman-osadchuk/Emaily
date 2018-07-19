@@ -41,7 +41,7 @@ class SurveyForm extends Component {
 function validate(values) {
     const errors = {};
 
-    errors.emails = validateEmails(values.emails || '');
+    errors.recipients = validateEmails(values.recipients || '');
 
     if (!values.title) {
         errors.title = 'You must provide a title';
@@ -55,8 +55,8 @@ function validate(values) {
         errors.body = 'You must provide a body';
     }
 
-    if (!values.emails) {
-        errors.emails = 'You must provide recipients';
+    if (!values.recipients) {
+        errors.recipients = 'You must provide recipients';
     }
 
 
