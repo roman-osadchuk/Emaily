@@ -2,11 +2,6 @@ const passport = require('passport');
 
 module.exports = app => {
 
-  // app.get('/', (err, req, res) => {
-  //     res.json({ "greeting": "hello"});
-  //   }
-  // );
-
   app.get('/auth/google', passport.authenticate('google', {
       scope: ['profile', 'email']
     })
