@@ -5,10 +5,12 @@ import * as actions from '../actions'
 
 
 import Header from './Header';
+import { Footer } from './Footer';
 import Landing from './Landing';
 import { Thanks } from './Thanks';
 import { Dashboard } from './Dashboard';
 import SurveyNew from './surveys/SurveyNew';
+import MyGithubAccount from './MyGithubAccount';
 
 
 class App extends Component {
@@ -28,7 +30,9 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/surveys" component={Dashboard} />
             <Route exact path="/api/surveys/thank" component={Thanks} />
+            <Route exact path="/github" component={MyGithubAccount} />
             <Route path="/surveys/new" component={SurveyNew} />
+            <Footer />
           </div>
         </BrowserRouter>
       </div>
