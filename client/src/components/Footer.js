@@ -6,7 +6,7 @@ export const Footer = () => {
 
     return (
       <div className="footer_container">
-        The app is created by Roman Osadchuk
+        The app is created by Roman Osadchuk.
         <Link to="/github" >
             <i className="fab fa-github"></i>
         </Link>
