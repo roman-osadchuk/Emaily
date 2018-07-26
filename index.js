@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const path = require('path');
+const favicon = require('serve-favicon');
 const keys = require('./config/keys');
 require('./models/User');
 require('./models/Survey');
@@ -12,6 +14,8 @@ require('./services/passport');
 mongoose.connect(keys.mongoURI);
 
 const app = express();
+
+
 
 app.use(bodyParser.json());
 
@@ -34,6 +38,8 @@ require('./routes/surveyRoutes')(app);
 
 
 if (process.env.NODE_ENV === 'production') {
+
+  app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
   // Express will serve up production assets
   app.use(express.static('client/build'));
 
