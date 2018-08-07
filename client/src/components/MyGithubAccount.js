@@ -11,7 +11,7 @@ class MyGithubAccount extends Component {
   render() {
     return (
       <div>
-          null
+          
       </div>
     );
   }
