@@ -40,7 +40,7 @@ require('./routes/surveyRoutes')(app);
 if (process.env.NODE_ENV === 'production') {
 
   //serving favicon in production
-  app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
+  app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')))
   // Express will serve up production assets
   app.use(express.static('client/build'));
 
