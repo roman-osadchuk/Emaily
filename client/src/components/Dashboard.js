@@ -1,19 +1,18 @@
-import React, { Component } from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 import SurveyList from './surveys/SurveyList';
 
-import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
-
-
-export const Dashboard = () => (
+const Dashboard = () => {
+  return (
     <div>
-        <SurveyList />
-
-        <Link to="/surveys/new" >
-            <Button variant="fab" color="primary" aria-label="Add" className="dashboard_button">
-                <AddIcon />
-            </Button>
+      <SurveyList />
+      <div className="fixed-action-btn">
+        <Link to="/surveys/new" className="btn-floating btn-large red">
+          <i className="material-icons">add</i>
         </Link>
+      </div>
     </div>
-)
+  );
+};
+
+export default Dashboard;

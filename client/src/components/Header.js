@@ -1,85 +1,47 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Payments from './Payments';
 
-
-
-
-const styles = {
-  root: {
-    flexGrow: 1,
-  },
-  flex: {
-    flex: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-  appBarColor: {
-    backgroundColor: "red"
-  }
-};
-
-
-
 class Header extends Component {
-  constructor(props) {
-    super(props);
-
-
-  }
-
   renderContent() {
     switch (this.props.auth) {
       case null:
-        return '';
+        return;
       case false:
-        return  <Button variant="raised" href="/auth/google"> Login with Google </Button>
+        return <li><a href="/auth/google">Login With Google</a></li>;
       default:
-        return <div className="header_toolbar">
-          <Payments />
-          <div className="header_credits">Credits: {this.props.auth.credits}</div>
-          <Button variant="raised" href="/api/logout"> Logout </Button>
-        </div>
+        return [
+          <li key="1"><Payments /></li>,
+          <li key="3" style={{ margin: '0 10px' }}>
+            Credits: {this.props.auth.credits}
+          </li>,
+          <li key="2"><a href="/api/logout">Logout</a></li>
+        ];
     }
   }
 
-
   render() {
-    const { classes } = this.props;
-
     return (
-      <div className={classes.root}>
-        <AppBar position="static" className={classes.appBarColor}>
-          <Toolbar style={{display: 'flex', justifyContent: 'space-between'}} >
-              <Link to={this.props.auth ? '/surveys' : '/'} style={{fontSize: '36px', color: '#fff', textDecoration: 'none'}} >
-                Emaily
-              </Link>
+      <nav>
+        <div className="nav-wrapper">
+          <Link
+            to={this.props.auth ? '/surveys' : '/'}
+            className="left brand-logo"
+          >
+            Emaily
+          </Link>
+          <ul className="right">
             {this.renderContent()}
-          </Toolbar>
-        </AppBar>
-      </div>
+          </ul>
+        </div>
+      </nav>
     );
   }
 }
 
-Header.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-function mapStateToProps(state) {
-  return { auth: state.auth }
+function mapStateToProps({ auth }) {
+  return { auth };
 }
 
-export default withStyles(styles)(connect(mapStateToProps, null)(Header));
+export default connect(mapStateToProps)(Header);

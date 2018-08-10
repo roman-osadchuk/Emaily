@@ -1,13 +1,15 @@
-import React, { Component } from 'react'
-import TextField from '@material-ui/core/TextField';
-import FormHelperText from '@material-ui/core/FormHelperText';
+// SurveyField contains logic to render a single
+// label and text input
+import React from 'react';
 
 export default ({ input, label, meta: { error, touched } }) => {
-
-    return (
-        <div className="survey_input_container">
-            <TextField {...input} label={label} />
-            <FormHelperText style={{ marginTop: '-3px', color: '#f24' }}>{touched && error}</FormHelperText>
-        </div>
-    )
-}
+  return (
+    <div>
+      <label>{label}</label>
+      <input {...input} style={{ marginBottom: '5px' }} />
+      <div className="red-text" style={{ marginBottom: '20px' }}>
+        {touched && error}
+      </div>
+    </div>
+  );
+};

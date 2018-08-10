@@ -1,42 +1,46 @@
-import React, { Component } from 'react'
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Button from '@material-ui/core/Button';
-import { withRouter } from 'react-router';
+// SurveyFormReview shows users their form inputs for review
+import _ from 'lodash';
+import React from 'react';
 import { connect } from 'react-redux';
+import formFields from './formFields';
+import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions';
-import { FIELDS } from './formFields';
-
 
 const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
-
-    const reviewFields = FIELDS.map(({ name, label }) => {
-        return (
-            <FormControl className="survey_form_review_field" key={name}>
-              <InputLabel htmlFor="name-disabled">{label}</InputLabel>
-              <Input id="name-disabled" value={formValues[name]} disabled />
-            </FormControl>
-        )
-    });
-
+  const reviewFields = _.map(formFields, ({ name, label }) => {
     return (
-        <div className="survey_form_review_container">
-            <h2>Please confirm your entries</h2>
-            {reviewFields}
-            <div className="survey_cancel_submit_button_container">
-                <Button variant="contained" color="secondary" type="button" onClick={onCancel}>Back</Button>
-
-                <Button variant="contained" color="primary" type="submit" onClick={() => submitSurvey(formValues, history)}>Send Survey</Button>
-            </div>
+      <div key={name}>
+        <label>{label}</label>
+        <div>
+          {formValues[name]}
         </div>
-    )
-}
+      </div>
+    );
+  });
+
+  return (
+    <div>
+      <h5>Please confirm your entries</h5>
+      {reviewFields}
+      <button
+        className="yellow darken-3 white-text btn-flat"
+        onClick={onCancel}
+      >
+        Back
+      </button>
+      <button
+        onClick={() => submitSurvey(formValues, history)}
+        className="green btn-flat right white-text"
+      >
+        Send Survey
+        <i className="material-icons right">email</i>
+      </button>
+    </div>
+  );
+};
 
 function mapStateToProps(state) {
-    return {
-        formValues: state.form.surveyForm.values
-    }
+  return { formValues: state.form.surveyForm.values };
 }
 
 export default connect(mapStateToProps, actions)(withRouter(SurveyFormReview));

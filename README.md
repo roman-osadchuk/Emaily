@@ -1,2 +1,0 @@
-# Emaily
-feedbacks collector
